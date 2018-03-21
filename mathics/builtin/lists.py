@@ -2477,6 +2477,10 @@ class Riffle(Builtin):
 
     >> Riffle[{a, b, c}, x]
      = {a, x, b, x, c}
+    >> Riffle[{a},x]
+    = {a} 
+    >> Riffle[{a},{x}]
+    = {a, x}
     >> Riffle[{a, b, c}, {x, y, z}]
      = {a, x, b, y, c, z}
     >> Riffle[{a, b, c, d, e, f}, {x, y, z}]
@@ -2503,7 +2507,7 @@ class Riffle(Builtin):
         if sep.has_form('List', None):
             return Expression('List', *riffle_lists(list.get_leaves(), sep.leaves))
         else:
-            return Expression('List', *riffle_lists(list.get_leaves(), [sep]))
+            return Expression('List', *riffle(list.get_leaves(), sep))
 
 
 def _is_sameq(same_test):
